@@ -1,0 +1,20 @@
+Description='WPA2 Encrypted Wireless Network'
+Interface=wlan1
+Connection=wireless
+
+Security=wpa
+IP=dhcp
+DHCPReleaseOnStop=yes
+
+ESSID='Kotosh'
+Key='<your-password-here>'
+DNS='127.0.0.1'
+
+# Set a priority for automatic profile selection
+Priority=2
+
+# Enable internet sharing and allow our own devices
+ExecUpPost='/home/alarm/bin/run_iptables.sh wlan1 wlan0 ; /home/alarm/bin/enable_us.sh'
+
+# Remove iptables configurations after went down
+ExecDownPre='/home/alarm/bin/reset_iptables.sh || true'
